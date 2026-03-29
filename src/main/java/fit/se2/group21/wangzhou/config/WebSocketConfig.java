@@ -6,24 +6,24 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
-/**
- * WebSocket configuration for real-time chat (STOMP protocol)
- */
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        // TODO: Enable simple message broker for /topic and /queue destinations
-        config.enableSimpleBroker("/topic", "/queue");
+        // /topic is used for broadcasting to multiple subscribers (e.g., a chat room)
+        config.enableSimpleBroker("/topic");
+
+        // /app is the prefix for messages sent FROM the client TO the server
         config.setApplicationDestinationPrefixes("/app");
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        // TODO: Register WebSocket endpoint for client connections
-        registry.addEndpoint("/ws/chat").setAllowedOrigins("*").withSockJS();
+        // The endpoint the client uses to connect to the WebSocket server
+        registry.addEndpoint("/ws-chat")
+                .setAllowedOriginPatterns("*") // Configure according to your CORS policy
+                .withSockJS(); // Fallback for browsers that don't support WebSockets
     }
 }
-

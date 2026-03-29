@@ -15,12 +15,21 @@ import lombok.NoArgsConstructor;
 @Builder
 public class MessageRequest {
 
+    private Integer messageId;
+
     private Integer conversationId;
+
+    private Integer senderId;
+
+    private String senderName;
 
     private String content;
 
     private MessageType messageType = MessageType.TEXT;
 
     private String attachmentUrl;
+
+    public Integer getConversationId() {
+    }
 }
 

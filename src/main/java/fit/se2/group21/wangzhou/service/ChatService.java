@@ -1,18 +1,15 @@
 package fit.se2.group21.wangzhou.service;
 
 import fit.se2.group21.wangzhou.dto.request.MessageRequest;
+import fit.se2.group21.wangzhou.dto.response.MessageResponse;
 
 /**
  * Chat service interface (WebSocket real-time messaging)
  */
 public interface ChatService {
 
-    void sendMessage(Integer userId, MessageRequest request);
+    MessageResponse saveMessage(MessageRequest request, String senderEmail);
 
-    void markMessageAsRead(Integer messageId);
-
-    void updateUnreadCount(Integer conversationId, Integer userId);
-
-    void notifyNewMessage(Integer conversationId, String messageContent);
+    List<MessageResponse> getChatHistory(Integer conversationId);
 }
 

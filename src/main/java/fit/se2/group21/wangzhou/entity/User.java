@@ -18,8 +18,49 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User extends BaseEntity {
+public class User extends BaseEntity implements UserDetails {
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // Spring Security yêu cầu Role phải có tiền tố "ROLE_" khi dùng với hasRole()
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email; // Sử dụng email làm tài khoản đăng nhập
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !this.accountLocked; // Liên kết với field accountLocked của bạn
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.emailVerified; // Chỉ cho đăng nhập nếu đã verify email (tuỳ logic dự án)
+    }
+}
+    
+    
+    
+    
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

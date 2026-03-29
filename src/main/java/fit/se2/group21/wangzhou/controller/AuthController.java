@@ -24,11 +24,6 @@ public class AuthController {
         return "auth/login";
     }
 
-    @PostMapping("/login")
-    public String login(@ModelAttribute LoginRequest request, Model model) {
-        // TODO: Implement login logic and redirect based on role
-        return "redirect:/dashboard";
-    }
 
     @GetMapping("/register")
     public String registerPage(Model model) {

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html class="light" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title th:text="${pageTitle}">Sign Up - Guangzhou Direct</title>
+    <script th:src="@{https://cdn.tailwindcss.com?plugins=forms,container-queries}"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "surface-bright": "#f8f9fb", "on-tertiary-fixed": "#00201c", "on-tertiary": "#ffffff",
+                "tertiary-container": "#00544b", "on-surface-variant": "#424750", "secondary": "#48626e",
+                "surface-container-low": "#f2f4f6", "on-error-container": "#93000a", "inverse-on-surface": "#eff1f3",
+                "primary-container": "#004b87", "tertiary-fixed": "#8df5e4", "primary": "#003461",
+                "surface": "#f8f9fb", "on-secondary": "#ffffff", "on-tertiary-container": "#63cbbb",
+                "error": "#ba1a1a", "surface-tint": "#27609d", "surface-container": "#eceef0",
+                "outline-variant": "#c2c6d1", "on-background": "#191c1e", "outline": "#727781",
+                "on-primary-fixed-variant": "#004882", "on-surface": "#191c1e", "primary-fixed": "#d3e4ff",
+                "secondary-fixed": "#cbe7f5", "on-primary-fixed": "#001c38", "on-error": "#ffffff",
+                "surface-dim": "#d8dadc", "surface-variant": "#e0e3e5", "primary-fixed-dim": "#a3c9ff",
+                "inverse-surface": "#2d3133", "inverse-primary": "#a3c9ff", "surface-container-lowest": "#ffffff",
+                "on-secondary-fixed": "#021f29", "surface-container-high": "#e6e8ea", "on-primary-container": "#8abcff",
+                "tertiary-fixed-dim": "#70d8c8", "on-tertiary-fixed-variant": "#005048", "on-secondary-fixed-variant": "#304a55",
+                "secondary-fixed-dim": "#afcbd8", "secondary-container": "#cbe7f5", "error-container": "#ffdad6",
+                "background": "#f8f9fb", "surface-container-highest": "#e0e3e5", "on-primary": "#ffffff",
+                "on-secondary-container": "#4e6874", "tertiary": "#003b34"
+              },
+              fontFamily: { "headline": ["Manrope"], "body": ["Inter"], "label": ["Inter"] },
+              borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            },
+          },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .primary-gradient { background: linear-gradient(135deg, #003461 0%, #004b87 100%); }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased min-h-screen flex items-center justify-center p-4 md:p-8">
+<div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_32px_64px_-12px_rgba(0,0,0,0.06)]">
+
+    <div class="hidden lg:flex flex-col justify-between p-12 primary-gradient relative overflow-hidden text-white">
+        <div class="relative z-10">
+            <h1 class="font-headline text-3xl font-extrabold tracking-tighter mb-12" th:text="${appName}">Guangzhou Direct</h1>
+            <div class="space-y-6">
+                <h2 class="font-headline text-5xl font-bold leading-tight" th:text="${heroTitle}">Professional Sourcing Platform.</h2>
+                <p class="text-on-primary-container text-lg max-w-md font-medium opacity-90" th:text="${heroSubtitle}">Connect directly with manufacturers.</p>
+            </div>
+        </div>
+        <div class="relative z-10 grid grid-cols-2 gap-6">
+            <div class="p-6 rounded-lg bg-white/10 backdrop-blur-md border border-white/10">
+                <div class="text-3xl font-bold mb-1" th:text="${stat1Value}">10k+</div>
+                <div class="text-sm font-label opacity-80 uppercase tracking-widest" th:text="${stat1Label}">Suppliers</div>
+            </div>
+            <div class="p-6 rounded-lg bg-white/10 backdrop-blur-md border border-white/10">
+                <div class="text-3xl font-bold mb-1" th:text="${stat2Value}">24/7</div>
+                <div class="text-sm font-label opacity-80 uppercase tracking-widest" th:text="${stat2Label}">Support</div>
+            </div>
+        </div>
+        <div class="absolute inset-0 z-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1551232864-3f0890e580d9?q=80&w=2000')] bg-cover"></div>
+    </div>
+
+    <div class="p-8 md:p-16 flex flex-col justify-center bg-surface-container-lowest">
+        <div class="mb-10">
+            <h2 class="font-headline text-3xl font-bold text-on-surface mb-2" th:text="${formTitle}">Create new account</h2>
+            <p class="text-on-surface-variant font-medium" th:text="${formSubtitle}">Start optimizing your sourcing today.</p>
+        </div>
+
+        <div th:if="${registerError}" class="mb-6 p-4 rounded-lg bg-error-container text-on-error-container text-sm" th:text="${registerError}"></div>
+        <div th:if="${registerSuccess}" class="mb-6 p-4 rounded-lg bg-secondary-container text-on-secondary-container text-sm" th:text="${registerSuccess}"></div>
+
+        <form th:action="@{/auth/register}" th:object="${registerRequest}" method="post" class="space-y-5">
+
+            <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-2">
+                    <label class="font-label text-xs font-semibold uppercase text-on-surface-variant px-1">First Name</label>
+                    <input class="w-full bg-surface-container-low border-none rounded-lg py-4 px-4 focus:ring-2 focus:ring-primary/20"
+                           type="text" placeholder="John" th:field="*{firstName}"/>
+                    <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-xs text-error"></p>
+                </div>
+                <div class="space-y-2">
+                    <label class="font-label text-xs font-semibold uppercase text-on-surface-variant px-1">Last Name</label>
+                    <input class="w-full bg-surface-container-low border-none rounded-lg py-4 px-4 focus:ring-2 focus:ring-primary/20"
+                           type="text" placeholder="Doe" th:field="*{lastName}"/>
+                    <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-xs text-error"></p>
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <label class="font-label text-xs font-semibold uppercase text-on-surface-variant px-1">Email</label>
+                <input class="w-full bg-surface-container-low border-none rounded-lg py-4 px-4 focus:ring-2 focus:ring-primary/20"
+                       type="email" placeholder="email@example.com" th:field="*{email}"/>
+                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-xs text-error"></p>
+            </div>
+
+            <div class="space-y-2">
+                <label class="font-label text-xs font-semibold uppercase text-on-surface-variant px-1">Phone</label>
+                <input class="w-full bg-surface-container-low border-none rounded-lg py-4 px-4 focus:ring-2 focus:ring-primary/20"
+                       type="tel" placeholder="+84..." th:field="*{phone}"/>
+                <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="text-xs text-error"></p>
+            </div>
+
+            <div class="space-y-2">
+                <label class="font-label text-xs font-semibold uppercase text-on-surface-variant px-1">Password</label>
+                <input class="w-full bg-surface-container-low border-none rounded-lg py-4 px-4 focus:ring-2 focus:ring-primary/20"
+                       type="password" placeholder="••••••••" th:field="*{password}"/>
+                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-xs text-error"></p>
+            </div>
+
+            <div class="space-y-2">
+                <label class="font-label text-xs font-semibold uppercase text-on-surface-variant px-1">I am a...</label>
+                <select class="w-full bg-surface-container-low border-none rounded-lg py-4 px-4 focus:ring-2 focus:ring-primary/20" th:field="*{role}">
+                    <option th:value="${T(fit.se2.group21.wangzhou.enums.Role).CUSTOMER}">Customer</option>
+                    <option th:value="${T(fit.se2.group21.wangzhou.enums.Role).AFFILIATE}">Affiliate</option>
+                </select>
+            </div>
+
+            <button class="w-full primary-gradient text-white font-headline font-bold py-4 rounded-lg shadow-lg uppercase text-sm mt-4" type="submit">
+                Sign up for free
+            </button>
+        </form>
+
+        <div class="mt-10 text-center">
+            <p class="text-on-surface-variant font-medium">
+                Already have an account? <a class="text-primary font-bold hover:underline" th:href="@{/auth/login}">Log in now</a>
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

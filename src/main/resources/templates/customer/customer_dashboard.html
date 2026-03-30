@@ -103,7 +103,7 @@
 </button>
 <div class="flex items-center space-x-3 pl-4 border-l border-outline-variant/30">
 <div class="text-right hidden sm:block">
-<p class="text-xs font-bold text-primary font-headline"><span th:text="${user.fullName}">Minh Tran</span></p>
+<p class="text-xs font-bold text-primary font-headline"><span th:text="${user.firstName + ' ' + user.lastName}">Minh Tran</span></p>
 <p class="text-[10px] text-on-surface-variant"><span th:text="${\'ID: \' + user.id}">ID: GZ-8892</span></p>
 </div>
 <span class="material-symbols-outlined text-3xl text-primary-container">account_circle</span>
@@ -159,7 +159,7 @@
 <!-- Header Section -->
 <section class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 <div>
-<h1 class="text-3xl md:text-4xl font-black text-primary font-headline tracking-tighter mb-2">Welcome back, <span th:text="${user.fullName}">Minh Tran</span></h1>
+<h1 class="text-3xl md:text-4xl font-black text-primary font-headline tracking-tighter mb-2">Welcome back, <span th:text="${user.firstName + ' ' + user.lastName}">Minh Tran</span></h1>
 <p class="text-on-surface-variant font-medium">Track your Guangzhou sourcing progress for today.</p>
 </div>
 <div class="flex items-center gap-3">

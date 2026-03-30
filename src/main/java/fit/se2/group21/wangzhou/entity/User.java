@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -57,6 +58,12 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "referral_code")
     private String referralCode;
 
+    @Column(name = "verification_token")
+    private String verificationToken;
+
+    @Column(name = "token_expiry_time")
+    private LocalDateTime tokenExpiryTime;
+
     // ...existing relationships...
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Order> orders;
@@ -103,7 +110,7 @@ public class User extends BaseEntity implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return this.emailVerified; // Chỉ cho đăng nhập nếu đã verify email (tuỳ logic dự án)
+        return this.emailVerified; // Chỉ cho đăng nhập nếu đã verify email
     }
 }
 

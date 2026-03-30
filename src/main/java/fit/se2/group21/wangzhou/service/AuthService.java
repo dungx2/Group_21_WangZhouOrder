@@ -14,7 +14,10 @@ public interface AuthService {
     UserResponse register(RegisterRequest request);
 
     void verifyEmail(String email, String token);
+    void resendVerificationMail (String email);
 
     void sendVerificationEmail(String email);
+
+    void authenticate(String email, String password);
 }
 

@@ -24,11 +24,6 @@ public class ChatServiceImpl implements ChatService {
     private final ConversationRepository conversationRepository;
     private final UserRepository userRepository;
 
-    public ChatServiceImpl(MessageRepository messageRepository, ConversationRepository conversationRepository, UserRepository userRepository) {
-        this.messageRepository = messageRepository;
-        this.conversationRepository = conversationRepository;
-        this.userRepository = userRepository;
-    }
 
     @Override
     @Transactional
@@ -72,10 +67,11 @@ public class ChatServiceImpl implements ChatService {
                 .messageId(message.getId())
                 .conversationId(message.getConversation().getId())
                 .senderId(message.getSender().getId())
-                .senderName(message.getSender().getName()) // Assuming User entity has a getName() method
+                .senderName(message.getSender().getName())
                 .content(message.getContent())
                 .messageType(message.getMessageType())
                 .attachmentUrl(message.getAttachmentUrl())
+                .createdAt(message.getCreatedAt())   // ← now resolves correctly
                 .build();
     }
 }

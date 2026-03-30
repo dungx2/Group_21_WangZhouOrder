@@ -20,6 +20,7 @@ public class ChatController {
 
     private final ChatService chatService;
 
+
     // --- Standard HTTP Endpoints for rendering views --- //
 
     @GetMapping("/chat")

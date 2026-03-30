@@ -29,7 +29,6 @@ public class MessageRequest {
 
     private String attachmentUrl;
 
-    public Integer getConversationId() {
-    }
+
 }
 

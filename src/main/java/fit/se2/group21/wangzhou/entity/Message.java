@@ -1,5 +1,6 @@
 package fit.se2.group21.wangzhou.entity;
 
+import fit.se2.group21.wangzhou.controller.ChatController;
 import fit.se2.group21.wangzhou.enums.MessageType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -15,5 +15,7 @@ public interface MessageRepository extends JpaRepository<Message, Integer> {
     List<Message> findByConversationId(Integer conversationId);
 
     List<Message> findByConversationIdOrderByCreatedAtDesc(Integer conversationId);
+
+    List<Message> findByConversationIdOrderByCreatedAtAsc(Integer conversationId);
 }
 
